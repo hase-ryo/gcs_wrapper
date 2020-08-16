@@ -2,3 +2,4 @@ secret/
 .env
 .env.yaml
 __pycache__/
+.gitignore
