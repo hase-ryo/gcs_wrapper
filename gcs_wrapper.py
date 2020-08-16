@@ -27,12 +27,15 @@ def check_gcs_file_exists(bucket_name, file_path):
     else:
         return(True)
 
-def upload_gcs_file(bucket_name, file_path, result):
+def upload_gcs_file_from_dictlist(bucket_name, file_path, result):
+    dmplist = []
+    for line in result:
+        dmplist.append(json.dumps(line, ensure_ascii=False))
 
     client = get_gcs_client()
     bucket = client.get_bucket(bucket_name)
     blob = bucket.blob(file_path)
-    blob.upload_from_string('\n'.join(result))
+    blob.upload_from_string('\n'.join(dmplist))
     print(file_path + " upload success!!")
 
 def get_gcs_file_to_dictlist(bucket_name, file_name):
