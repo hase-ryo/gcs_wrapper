@@ -50,3 +50,14 @@ def get_gcs_file_to_dictlist(bucket_name, file_name):
 
     return(result)
 
+def get_gcs_files(bucket_name, prefix):
+    client = get_gcs_client()
+    blobs = client.list_blobs(bucket_name)
+    filename_list = []
+    for blob in blobs:
+        if prefix:
+            if blob.name.startswith(prefix):
+                filename_list.append(blob.name)
+    return(filename_list)
+
+
