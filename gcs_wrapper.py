@@ -58,6 +58,8 @@ def get_gcs_files(bucket_name, prefix):
         if prefix:
             if blob.name.startswith(prefix):
                 filename_list.append(blob.name)
+        else:
+            filename_list.append(blob.name)
     return(filename_list)
 
 
