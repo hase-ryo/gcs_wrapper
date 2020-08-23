@@ -21,11 +21,11 @@ def check_gcs_file_exists(bucket_name, file_path):
 
     client = get_gcs_client()
     bucket = client.get_bucket(bucket_name)
-    blob = bucket.get_blob(file_path)
-    if blob is None:
-        return(False)
-    else:
-        return(True)
+    blobs = bucket.list_blobs(prefix=file_path)
+    for blob in blobs:
+        if file_path in blob.name:
+            return(True)
+    return(False)
 
 def upload_gcs_file_from_dictlist(bucket_name, file_path, result):
     dmplist = []
