@@ -70,7 +70,7 @@ def delete_gcs_file(bucket_name, file_path):
     blob.delete()
     print("Object {} deleted".format(file_path))
 
-def search_and_destory_file(bucket_name, file_path):
+def search_and_destroy_file(bucket_name, file_path):
     client = get_gcs_client()
     blobs = client.list_blobs(bucket_name)
     for blob in blobs:
