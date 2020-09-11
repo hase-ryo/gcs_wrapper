@@ -27,18 +27,6 @@ def check_gcs_file_exists(bucket_name, file_path):
             return(True)
     return(False)
 
-def get_gcs_file_names(bucket_name, file_path):
-
-    client = get_gcs_client()
-    bucket = client.get_bucket(bucket_name)
-    blobs = bucket.list_blobs(prefix=file_path)
-    path_list = []
-    for blob in blobs:
-        if file_path in blob.name:
-            path_list.append(blob.name)
-
-    return(get_gcs_file_names)
-
 def upload_gcs_file_from_dictlist(bucket_name, file_path, result):
     dmplist = []
     for line in result:
@@ -74,4 +62,10 @@ def get_gcs_files(bucket_name, prefix):
             filename_list.append(blob.name)
     return(filename_list)
 
+def delete_gcs_file(bucket_name, file_path):
+    client = get_gcs_client()
 
+    bucket = client.get_bucket(bucket_name)
+    blob = bucket.blob(file_path)
+    blob.delete()
+    print("Object {} deleted".format(file_path))
